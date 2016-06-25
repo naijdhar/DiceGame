@@ -87,4 +87,11 @@ public class DiceRunnerTest {
 		Integer points = DiceRunner.calculatePoints(diceValues);
 		Assert.assertEquals(700, points.intValue());
 	}
+	
+	@Test
+	public void testRollFiveDice(){
+		List<Integer> diceValues = DiceRunner.rollFiveDice();
+		Assert.assertNotNull(diceValues);
+		Assert.assertTrue(diceValues.size() == 5);
+	}
 }
