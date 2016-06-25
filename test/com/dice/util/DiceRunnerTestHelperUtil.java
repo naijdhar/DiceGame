@@ -22,7 +22,7 @@ public class DiceRunnerTestHelperUtil {
 	 * @return  Five dice output in a list
 	 */
 	public static List<Integer> rollFiveDice(int firstDice, int secondDice, int thirdDice, int fourthDice, int fifthDice) {
-		List<Integer> diceOutput = new ArrayList<Integer>();
+		List<Integer> diceOutput = new ArrayList<Integer>(5);
 		diceOutput.add(firstDice);
 		diceOutput.add(secondDice);
 		diceOutput.add(thirdDice);

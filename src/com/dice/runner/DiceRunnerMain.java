@@ -18,7 +18,7 @@ import com.dice.constant.DiceRunnerConstant;
  *         dice together
  *
  */
-public class DiceRunner {
+public class DiceRunnerMain {
 
 	/**
 	 * @param args
@@ -29,6 +29,7 @@ public class DiceRunner {
 		// Roll 5 dice
 		List<Integer> diceValues = rollFiveDice();
 
+		// Calculate total points 
 		Integer points = calculatePoints(diceValues);
 
 		System.out.println("Total points :" + points);
@@ -47,7 +48,7 @@ public class DiceRunner {
 	public static Integer calculatePoints(List<Integer> diceValues) {
 
 		Integer totalPoints = null;
-		List<Integer> tempPointsList = new ArrayList<Integer>();
+		List<Integer> tempPointsList = new ArrayList<Integer>(5);
 		
 		try{
 			
@@ -125,7 +126,7 @@ public class DiceRunner {
 	 * @return list of dice values for 5 dice rolls
 	 */
 	public static List<Integer> rollFiveDice() {
-		List<Integer> diceValues = new ArrayList<Integer>();
+		List<Integer> diceValues = new ArrayList<Integer>(5);
 
 		// Roll dice 5 times
 		int dice1 = rollDice();

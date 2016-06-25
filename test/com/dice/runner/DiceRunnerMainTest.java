@@ -16,7 +16,7 @@ import com.dice.util.DiceRunnerTestHelperUtil;
  * @author naiji
  *
  */
-public class DiceRunnerTest {
+public class DiceRunnerMainTest {
 
 	/**
 	 * @throws java.lang.Exception
@@ -36,7 +36,7 @@ public class DiceRunnerTest {
 	public void testCalculatePoints_For_NoDiceRolled_Exception() {
 		
 		List<Integer> diceValues = null;
-		Integer points = DiceRunner.calculatePoints(diceValues);
+		Integer points = DiceRunnerMain.calculatePoints(diceValues);
 		Assert.assertEquals(null, points);
 	}
 
@@ -44,7 +44,7 @@ public class DiceRunnerTest {
 	public void testCalculatePoints_For_11123() {
 		
 		List<Integer> diceValues = DiceRunnerTestHelperUtil.rollFiveDice(1, 1, 1, 2, 2);
-		Integer points = DiceRunner.calculatePoints(diceValues);
+		Integer points = DiceRunnerMain.calculatePoints(diceValues);
 		Assert.assertEquals(1000, points.intValue());
 		
 		printInput(diceValues);
@@ -55,7 +55,7 @@ public class DiceRunnerTest {
 	public void testCalculatePoints_For_12345() {
 		
 		List<Integer> diceValues = DiceRunnerTestHelperUtil.rollFiveDice(1, 2, 3, 4, 5);
-		Integer points = DiceRunner.calculatePoints(diceValues);
+		Integer points = DiceRunnerMain.calculatePoints(diceValues);
 		Assert.assertEquals(140, points.intValue());
 		
 		printInput(diceValues);
@@ -66,7 +66,7 @@ public class DiceRunnerTest {
 	public void testCalculatePoints_For_11122() {
 		
 		List<Integer> diceValues = DiceRunnerTestHelperUtil.rollFiveDice(1, 1, 1, 2, 2);
-		Integer points = DiceRunner.calculatePoints(diceValues);
+		Integer points = DiceRunnerMain.calculatePoints(diceValues);
 		Assert.assertEquals(1000, points.intValue());
 		
 		printInput(diceValues);
@@ -77,7 +77,7 @@ public class DiceRunnerTest {
 	public void testCalculatePoints_For_54545() {
 		
 		List<Integer> diceValues = DiceRunnerTestHelperUtil.rollFiveDice(5, 4, 5, 4, 5);
-		Integer points = DiceRunner.calculatePoints(diceValues);
+		Integer points = DiceRunnerMain.calculatePoints(diceValues);
 		Assert.assertEquals(580, points.intValue());
 		
 		printInput(diceValues);
@@ -88,7 +88,7 @@ public class DiceRunnerTest {
 	public void testCalculatePoints_For_444444() {
 		
 		List<Integer> diceValues = DiceRunnerTestHelperUtil.rollFiveDice(4, 4, 4, 4, 4);
-		Integer points = DiceRunner.calculatePoints(diceValues);
+		Integer points = DiceRunnerMain.calculatePoints(diceValues);
 		Assert.assertEquals(480, points.intValue());
 		
 		printInput(diceValues);
@@ -99,7 +99,7 @@ public class DiceRunnerTest {
 	public void testCalculatePoints_For_15551() {
 		
 		List<Integer> diceValues = DiceRunnerTestHelperUtil.rollFiveDice(1, 5, 5, 5, 1);
-		Integer points = DiceRunner.calculatePoints(diceValues);
+		Integer points = DiceRunnerMain.calculatePoints(diceValues);
 		Assert.assertEquals(700, points.intValue());
 		
 		printInput(diceValues);
@@ -108,7 +108,7 @@ public class DiceRunnerTest {
 	
 	@Test
 	public void testRollFiveDice(){
-		List<Integer> diceValues = DiceRunner.rollFiveDice();
+		List<Integer> diceValues = DiceRunnerMain.rollFiveDice();
 		Assert.assertNotNull(diceValues);
 		Assert.assertTrue(diceValues.size() == 5);
 	}
