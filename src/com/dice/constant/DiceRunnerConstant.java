@@ -31,4 +31,8 @@ public final class DiceRunnerConstant {
 		SINGLE_OCCURANCE_TO_POINTS_RULE_MAP.put(1, 100);
 		SINGLE_OCCURANCE_TO_POINTS_RULE_MAP.put(4, 40);
 	}
+	
+	public static final int DICE_MAX_VALUE = 6;
+	public static final int DICE_MIN_VALUE = 1;
+	public static final int DICE_THREE_OCCURRENCE = 3;
 }

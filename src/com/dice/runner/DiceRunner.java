@@ -5,7 +5,9 @@ package com.dice.runner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.dice.constant.DiceRunnerConstant;
 
@@ -26,7 +28,7 @@ public class DiceRunner {
 
 		// Roll 5 dice
 		List<Integer> diceValues = rollFiveDice();
-		
+
 		Integer points = calculatePoints(diceValues);
 
 		System.out.println("Total points :" + points);
@@ -44,15 +46,61 @@ public class DiceRunner {
 	 */
 	public static Integer calculatePoints(List<Integer> diceValues) {
 
-		Integer points = null;
+		Integer totalPoints = null;
+		List<Integer> tempPointsList = new ArrayList<Integer>();
+		
+		try{
+			
+			// Populate a map with key as dice value and number of occurrence as the value
+			Map<Integer, Long> diceValueToOccuranceMap = (Map<Integer, Long>) diceValues.stream()
+					.collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+			
+			// Iterate the map and find the points 
+			diceValueToOccuranceMap.entrySet().stream().filter((entry) -> entry.getValue() > 0).forEach((entry) -> {
+				
+				if (entry.getValue() >= 3) {					
+					// If 3 occurrence, get the points 
+					tempPointsList.add(getPointForThreeOccurance(entry));
+					
+					//If more than 3 exists for 1 & 4, get the points.
+					int count = (int) (entry.getValue() % DiceRunnerConstant.DICE_THREE_OCCURRENCE);
+					if (count > 0 && DiceRunnerConstant.SINGLE_OCCURANCE_TO_POINTS_RULE_MAP.containsKey(entry.getKey())) {
+						
+						tempPointsList.add(getPointForLessThanThreeOccurance(entry, count));
+					}
+					
+				}else if (DiceRunnerConstant.SINGLE_OCCURANCE_TO_POINTS_RULE_MAP.containsKey(entry.getKey())) {
+	
+					//If single entry exists for 1 & 4, get the points
+					tempPointsList.add(getPointForLessThanThreeOccurance(entry, entry.getValue().intValue()));
+				}
+			});
+			
+			// get the total points
+			totalPoints = getTotalPoints(tempPointsList);
+			
+		}catch(Exception e){
+			System.out.println("No Dice Rolled. There wont be any points "+e.getMessage());	
+			// If the exception occurs, totalPoints will be returned as null. 
+		}
+		
+		return totalPoints;
+	}
 
-		return points;
+	/**
+	 * This function finds the total points for the dice
+	 * @param tempPointsList
+	 * @return total points
+	 */
+	private static int getTotalPoints(List<Integer> tempPointsList) {
+		return tempPointsList.stream().mapToInt(Integer::intValue).sum();
 	}
 
 	/**
 	 * This function provides single occurrence of a dice values
 	 * 
-	 * @param
+	 * @param entry
+	 * @param count
 	 * @return points for single occurrence of a dice value
 	 */
 	private static int getPointForLessThanThreeOccurance(Entry<Integer, Long> entry, int count) {
@@ -74,7 +122,6 @@ public class DiceRunner {
 	/**
 	 * This function provides the dice values of 5 dice rolls.
 	 * 
-	 * @param
 	 * @return list of dice values for 5 dice rolls
 	 */
 	public static List<Integer> rollFiveDice() {
@@ -106,6 +153,8 @@ public class DiceRunner {
 	 * @return dice value
 	 */
 	private static int rollDice() {
-		return (int) (Math.random() * 6) + 1;
+		
+		return (int) (Math.random() * DiceRunnerConstant.DICE_MAX_VALUE) 
+				+ DiceRunnerConstant.DICE_MIN_VALUE;
 	}
 }
